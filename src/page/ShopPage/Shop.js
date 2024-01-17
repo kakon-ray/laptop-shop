@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <>
       <HeaderBanner />
-      <ProductSection title="Shop Now"></ProductSection>
+      <ProductSection title="SHOP NOW"></ProductSection>
     </>
   );
 };
