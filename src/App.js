@@ -6,6 +6,7 @@ import HomePage from './page/HomePage/Home';
 import TopNavbar from './component/TopNavbar/TopNavbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Product from './page/ProductPage/Product'
+import Footer from './component/Footer/Footer'
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
 
     </Routes>
     </BrowserRouter>
+
+    <Footer/>
    </>
   );
 }
