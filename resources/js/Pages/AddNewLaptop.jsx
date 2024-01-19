@@ -1,16 +1,38 @@
 import { Inertia } from '@inertiajs/inertia'
 import React from 'react';
 import TopNav from '../component/Navbar/TopNav';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
-const AddNewLaptop = () => {
+const AddNewLaptop = ({ msg }) => {
     const addlaptop = (e) => {
         e.preventDefault();
         const name = e.target.name.value;
         const image = e.target.image.value;
         const price = e.target.price.value;
-       
 
-        Inertia.post("/save-laptop",{name,image,price})
+
+
+        axios.post("/save-laptop", { name, image, price }).then((res) => {
+            if (res.data.status == 200) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+
+        })
     };
 
     return (
@@ -21,7 +43,7 @@ const AddNewLaptop = () => {
                 <div className="row mt-4">
                     <div className="card p-4">
                         <div className="col-lg-12">
-                            <form onSubmit={addlaptop}>
+                            <form onSubmit={addlaptop} method="POST" enctype="multipart/form-data">
                                 <div className="form-group">
                                     <label for="name">Laptop Name</label>
                                     <input type="text" className="form-control" name="name" placeholder="Laptop " />

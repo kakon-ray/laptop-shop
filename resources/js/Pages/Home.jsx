@@ -3,7 +3,8 @@ import TopNav from '../component/Navbar/TopNav';
 import { Table } from 'react-bootstrap';
 
 
-const Home = ({ title }) => {
+const Home = ({ allLaptop }) => {
+    console.log(allLaptop)
     return (
         <>
             <TopNav />
@@ -14,23 +15,33 @@ const Home = ({ title }) => {
                         <h2 className='text-center py-4'>Our Laptop</h2>
                     </div>
                     <div className="col-lg-12">
-                        <Table striped bordered hover>
+                        <Table striped bordered hover className='text-center'>
                             <thead>
                                 <tr>
-                                    <th>Namve</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
                                     <th>Image</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                              
+                                {allLaptop?.map((item) => {
+                                    return (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.image}</td>
+                                            <td>{item.price}</td>
+                                            <td className='d-flex gap-3 justify-content-center'>
+                                                <button className='btn btn-danger'>Delete</button>
+                                                <button className='btn btn-primary'>Update</button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+
+
                             </tbody>
                         </Table>
                     </div>
