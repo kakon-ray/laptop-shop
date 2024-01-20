@@ -1,7 +1,7 @@
 import React from 'react';
 import TopNav from '../component/Navbar/TopNav';
 import { Table } from 'react-bootstrap';
-
+import '../css/home.css'
 
 const Home = ({ allLaptop }) => {
     console.log(allLaptop)
@@ -31,7 +31,9 @@ const Home = ({ allLaptop }) => {
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
-                                            <td>{item.image}</td>
+                                            <td>
+                                                <img src={item.image} className='home-image' alt="" />
+                                            </td>
                                             <td>{item.price}</td>
                                             <td className='d-flex gap-3 justify-content-center'>
                                                 <button className='btn btn-danger'>Delete</button>

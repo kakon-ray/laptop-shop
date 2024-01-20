@@ -7,7 +7,10 @@ use App\Models\Laptop;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
+
 
 class UserGuestController extends Controller
 {
@@ -43,10 +46,8 @@ class UserGuestController extends Controller
                 $msg = $item;
             };
 
-            return response()->json([
-                'status' => 400,
-                'msg' => $msg
-            ], 200);
+            Session::flash('error', $msg);
+                return Redirect::back();
         } else {
             DB::beginTransaction();
 
@@ -70,16 +71,11 @@ class UserGuestController extends Controller
             }
 
             if ($laptop != null) {
-                return response()->json([
-                    'status' => 200,
-                    'msg' => 'Add New Book'
-                ]);
+                Session::flash('success', 'Submeted Book');
+                return Redirect::back();
             } else {
-                return response()->json([
-                    'status' => 500,
-                    'msg' => 'Server Error',
-                    'err_msg' => $err->getMessage()
-                ]);
+                Session::flash('error', 'Internal Server Error');
+                return Redirect::back();
             }
         }
     }

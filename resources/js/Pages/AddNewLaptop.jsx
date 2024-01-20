@@ -1,50 +1,57 @@
 import { Inertia } from '@inertiajs/inertia'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopNav from '../component/Navbar/TopNav';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useForm } from '@inertiajs/react'
 
-const AddNewLaptop = () => {
+const AddNewLaptop = ({ success, error }) => {
 
 
     const { data, setData, post, progress } = useForm({
-        name:null,
+        name: null,
         avatar: null,
         price: null,
     })
 
+
     function submit(e) {
         e.preventDefault()
         post('/save-laptop')
+
     }
 
-    // const addlaptop = () => {
-    //     e.preventDefault();
 
 
-    //   console.log(data)
-    //     // axios.post("/save-laptop", formData).then((res) => {
-    //     //     if (res.data.status == 200) {
-    //     //         Swal.fire({
-    //     //             position: "center",
-    //     //             icon: "success",
-    //     //             title: res.data.msg,
-    //     //             showConfirmButton: false,
-    //     //             timer: 1500
-    //     //         });
-    //     //     } else {
-    //     //         Swal.fire({
-    //     //             position: "center",
-    //     //             icon: "success",
-    //     //             title: res.data.msg,
-    //     //             showConfirmButton: false,
-    //     //             timer: 1500
-    //     //         });
-    //     //     }
+    useEffect(() => {
+        if (success) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: success,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
 
-    //     // })
-    // };
+        } else if (error) {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: error,
+                showConfirmButton: false,
+                timer: 1500
+            });
+    
+        }
+      
+    }, [success, error]);
+
+
+
 
     return (
         <>
@@ -67,14 +74,15 @@ const AddNewLaptop = () => {
                                     <label for="price">Price</label>
                                     <input type="price" className="form-control" value={data.price} onChange={e => setData('price', e.target.value)} placeholder='1000' />
                                 </div>
-                                {progress && (
-                                    <progress value={progress.percentage} max="100">
-                                        {progress.percentage}%
-                                    </progress>
-                                )}
 
                                 <button type="submit" className="btn btn-primary mt-4">Submit</button>
                             </form>
+
+                            {/* {progress && (
+                                    <progress value={progress.percentage} max="100">
+                                        {progress.percentage}%
+                                    </progress>
+                                )} */}
                         </div>
                     </div>
                 </div>
