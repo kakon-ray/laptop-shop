@@ -22,10 +22,10 @@ class UserGuestController extends Controller
     }
     public function save_laptop(Request $request)
     {
-
+    //    dd($request->all());
         $arrayRequest = [
             'name' => $request->name,
-            'image' => $request->image,
+            'image' => $request->avatar,
             'price' => $request->price,
         ];
 
@@ -52,15 +52,15 @@ class UserGuestController extends Controller
 
             try {
 
-                // $img = $request->image;
-                // $image =  $img->store('/public/image');
-                // $image = (explode('/', $image))[2];
-                // $host = $_SERVER['HTTP_HOST'];
-                // $image = "http://" . $host . "/storage/image/" . $image;
+                $img = $request->avatar;
+                $image =  $img->store('/public/image');
+                $image = (explode('/', $image))[2];
+                $host = $_SERVER['HTTP_HOST'];
+                $image = "http://" . $host . "/storage/image/" . $image;
 
                 $laptop = Laptop::create([
                     'name' => $request->name,
-                    'image' => 'oer',
+                    'image' => $image,
                     'price' => $request->price,
                 ]);
 
