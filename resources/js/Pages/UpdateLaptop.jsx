@@ -1,28 +1,28 @@
-import { Inertia } from '@inertiajs/inertia'
 import React, { useEffect, useState } from 'react';
 import TopNav from '../component/Navbar/TopNav';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 import { useForm } from '@inertiajs/react'
+import Swal from 'sweetalert2';
+import { Inertia } from '@inertiajs/inertia'
 
-const AddNewLaptop = ({ success, error }) => {
+const UpdateLaptop = ({success, error,laptop}) => {
 
-    // Inertia.get(`delete-laptop/${removeId}`)
-    
     const { data, setData, post, progress } = useForm({
         name: null,
         avatar: null,
         price: null,
+        oldimage:laptop.image,
     })
 
+    useEffect(() => {
+        setData(laptop);
+       
+    }, [laptop]);
 
     function submit(e) {
         e.preventDefault()
-        post('/save-laptop')
+        post('/update-laptop-submited')
 
     }
-
-
 
     useEffect(() => {
         if (success) {
@@ -35,7 +35,7 @@ const AddNewLaptop = ({ success, error }) => {
             });
         
             setTimeout(function() {
-                location.reload();
+                window.history.back();
             }, 1500);
 
         } else if (error) {
@@ -50,9 +50,6 @@ const AddNewLaptop = ({ success, error }) => {
         }
       
     }, [success, error]);
-
-
-
 
     return (
         <>
@@ -69,21 +66,16 @@ const AddNewLaptop = ({ success, error }) => {
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="image">Image</label>
-                                    <input type="file" className="form-control" onChange={e => setData('avatar', e.target.files[0])} />
+                                    <input type="file" className="form-control"  onChange={e => setData('avatar', e.target.files[0])} />
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="price">Price</label>
                                     <input type="price" className="form-control" value={data.price} onChange={e => setData('price', e.target.value)} placeholder='1000' />
                                 </div>
 
-                                <button type="submit" className="btn btn-primary mt-4">Submit</button>
+                                <button type="submit" className="btn btn-primary mt-4">Update</button>
                             </form>
 
-                            {/* {progress && (
-                                    <progress value={progress.percentage} max="100">
-                                        {progress.percentage}%
-                                    </progress>
-                                )} */}
                         </div>
                     </div>
                 </div>
@@ -92,4 +84,4 @@ const AddNewLaptop = ({ success, error }) => {
     );
 };
 
-export default AddNewLaptop;
+export default UpdateLaptop;

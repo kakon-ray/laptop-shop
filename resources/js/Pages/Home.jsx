@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TopNav from '../component/Navbar/TopNav';
 import { Table } from 'react-bootstrap';
 import '../css/home.css'
+import { Inertia } from '@inertiajs/inertia'
+import axios from 'axios';
 
 const Home = ({ allLaptop }) => {
-    console.log(allLaptop)
+    const [laptop, setLaptop] = useState([])
+
+    useEffect(() => {
+        setLaptop(allLaptop);
+    }, [allLaptop]);
+
+    const deleteHandeler = (removeId) => {
+        axios.get(`/delete-laptop/${removeId}`).then((response) => {
+            console.log(response.data)
+            if (response.data.status == 200) {
+                const newLaptop = laptop.filter(item => item.id != removeId);
+                setLaptop(newLaptop)
+            }
+        });
+
+    }
+
     return (
         <>
             <TopNav />
@@ -26,7 +44,7 @@ const Home = ({ allLaptop }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {allLaptop?.map((item) => {
+                                {laptop?.map((item) => {
                                     return (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
@@ -36,8 +54,8 @@ const Home = ({ allLaptop }) => {
                                             </td>
                                             <td>{item.price}</td>
                                             <td className='d-flex gap-3 justify-content-center'>
-                                                <button className='btn btn-danger'>Delete</button>
-                                                <button className='btn btn-primary'>Update</button>
+                                                <button className='btn btn-danger' onClick={() => deleteHandeler(item.id)}>Delete</button>
+                                                <a href={`/update-laptop/${item.id}`} className='btn btn-primary'>Update</a>
                                             </td>
                                         </tr>
                                     );
