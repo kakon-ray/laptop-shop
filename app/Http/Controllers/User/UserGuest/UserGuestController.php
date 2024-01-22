@@ -35,12 +35,14 @@ class UserGuestController extends Controller
             'name' => $request->name,
             'image' => $request->avatar,
             'price' => $request->price,
+            'quentity' => $request->quentity,
         ];
 
         $arrayValidate  = [
             'name' => 'required',
             'image' => 'required',
             'price' => 'required',
+            'quentity' => 'required',
         ];
 
         $response = Validator::make($arrayRequest, $arrayValidate);
@@ -68,6 +70,7 @@ class UserGuestController extends Controller
                     'name' => $request->name,
                     'image' => $image,
                     'price' => $request->price,
+                    'quentity' => $request->quentity,
                 ]);
 
                 DB::commit();
@@ -145,22 +148,26 @@ class UserGuestController extends Controller
                     'name' => $request->name,
                     'image' => $request->avatar,
                     'price' => $request->price,
+                    'quentity' => $request->quentity,
                 ];
     
                 $arrayValidate  = [
                     'name' => 'required',
                     'image' => 'required',
                     'price' => 'required',
+                    'quentity' => 'required',
                 ];
             }else{
                 $arrayRequest = [
                     'name' => $request->name,
                     'price' => $request->price,
+                    'quentity' => $request->quentity,
                 ];
     
                 $arrayValidate  = [
                     'name' => 'required',
                     'price' => 'required',
+                    'quentity' => 'required',
                 ];
             }
 
@@ -193,6 +200,7 @@ class UserGuestController extends Controller
                     $laptop->name = $request->name;
                     $laptop->image = $image;
                     $laptop->price = $request->price;
+                    $laptop->quentity = $request->quentity;
 
                     $laptop->save();
                     DB::commit();

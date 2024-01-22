@@ -13,5 +13,6 @@ class Laptop extends Model
         'name',
         'image',
         'price',
+        'quentity',
     ];
 }

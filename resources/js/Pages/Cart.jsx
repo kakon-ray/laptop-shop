@@ -5,7 +5,7 @@ import '../css/home.css'
 import { Inertia } from '@inertiajs/inertia'
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartList, postCartList } from "../redux/action/CartListAction";
+import { deleteCartList, postCartList, update_cartqunatity } from "../redux/action/CartListAction";
 
 const Home = ({ allLaptop }) => {
 
@@ -18,6 +18,12 @@ const Home = ({ allLaptop }) => {
       const removeCartList = (item) => {
         dispatch(deleteCartList(item))
     }
+
+    const handleCartQuantity = (id,quantity) =>{
+     
+        dispatch(update_cartqunatity({id,quantity}))
+    }
+
 
     return (
         <>
@@ -49,6 +55,9 @@ const Home = ({ allLaptop }) => {
                                                 <img src={item.image} className='home-image' alt="" />
                                             </td>
                                             <td>{item.price}</td>
+                                            <td>
+                                                <input type="number"  defaultValue={item.quantity} onChange={e => handleCartQuantity(item.id,e.target.value)}/>
+                                            </td>
                                             <td className='d-flex gap-3 justify-content-center'>
                                                 <button className='btn btn-danger' onClick={() => removeCartList(item.id)}>Delete Cart</button>
                                             </td>

@@ -15,6 +15,7 @@ const UpdateLaptop = ({success, error,laptop}) => {
         name: null,
         avatar: null,
         price: null,
+        quentity: null,
         oldimage:laptop.image,
     })
 
@@ -78,6 +79,11 @@ const UpdateLaptop = ({success, error,laptop}) => {
                                 <div className="form-group mt-3">
                                     <label for="price">Price</label>
                                     <input type="price" className="form-control" value={data.price} onChange={e => setData('price', e.target.value)} placeholder='1000' />
+                                </div>
+
+                                <div className="form-group mt-3">
+                                    <label for="price">Quantity</label>
+                                    <input type="price" className="form-control" value={data.quentity} onChange={e => setData('quentity', e.target.value)} placeholder='1000' />
                                 </div>
 
                                 <button type="submit" className="btn btn-primary mt-4">Update</button>

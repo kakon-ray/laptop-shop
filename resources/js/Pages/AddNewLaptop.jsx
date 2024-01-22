@@ -8,11 +8,12 @@ import { useForm } from '@inertiajs/react'
 const AddNewLaptop = ({ success, error }) => {
 
     // Inertia.get(`delete-laptop/${removeId}`)
-    
+
     const { data, setData, post, progress } = useForm({
         name: null,
         avatar: null,
         price: null,
+        quentity: null,
     })
 
 
@@ -33,8 +34,8 @@ const AddNewLaptop = ({ success, error }) => {
                 showConfirmButton: false,
                 timer: 1500
             });
-        
-            setTimeout(function() {
+
+            setTimeout(function () {
                 location.reload();
             }, 1500);
 
@@ -46,9 +47,9 @@ const AddNewLaptop = ({ success, error }) => {
                 showConfirmButton: false,
                 timer: 1500
             });
-    
+
         }
-      
+
     }, [success, error]);
 
 
@@ -74,6 +75,11 @@ const AddNewLaptop = ({ success, error }) => {
                                 <div className="form-group mt-3">
                                     <label for="price">Price</label>
                                     <input type="price" className="form-control" value={data.price} onChange={e => setData('price', e.target.value)} placeholder='1000' />
+                                </div>
+
+                                <div className="form-group mt-3">
+                                    <label for="price">Quantity</label>
+                                    <input type="price" className="form-control" value={data.quentity} onChange={e => setData('quentity', e.target.value)} placeholder='1000' />
                                 </div>
 
                                 <button type="submit" className="btn btn-primary mt-4">Submit</button>
