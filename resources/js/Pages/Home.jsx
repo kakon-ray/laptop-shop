@@ -7,8 +7,10 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProduct,updateProduct } from "../redux/action/ProductAction";
 import { postCartList, update_cartqunatity } from "../redux/action/CartListAction";
+import { Link } from '@inertiajs/react'
+import Swal from 'sweetalert2';
 
-const Home = ({ allLaptop }) => {
+const Home = ({success, error, allLaptop }) => {
 
   const dispatch = useDispatch();
 
@@ -22,7 +24,7 @@ const Home = ({ allLaptop }) => {
     }, []);
 
 
-    const deleteHandeler = (removeId) => {
+const deleteHandeler = (removeId) => {
         axios.get(`/delete-laptop/${removeId}`).then((response) => {
             if (response.data.status == 200) {
                 dispatch(deleteProduct(removeId))
@@ -39,6 +41,35 @@ const Home = ({ allLaptop }) => {
         dispatch(postCartList(item))
     }
 
+    useEffect(() => {
+        if (success) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: success,
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            // dispatch(updateProduct(data))
+
+            // setTimeout(function() {
+            //     navigation.navigate('/')
+            //     window.location('/')
+            // }, 1500);
+
+        } else if (error) {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: error,
+                showConfirmButton: false,
+                timer: 1500
+            });
+    
+        }
+      
+    }, [success, error]);
 
     return (
         <>
@@ -74,7 +105,7 @@ const Home = ({ allLaptop }) => {
                                             <td className='d-flex gap-3 justify-content-center'>
                                                 <button className='btn btn-danger' onClick={() => deleteHandeler(item.id)}>Delete</button>
                                                 <button className='btn btn-danger' onClick={() => addtoCartList(item)}>Add Cart</button>
-                                                <a href={`/update-laptop/${item.id}`} className='btn btn-primary'>Update</a>
+                                                <Link  href={`/update-laptop/${item.id}`} className='btn btn-primary'>Update</Link>
                                             </td>
                                         </tr>
                                     );

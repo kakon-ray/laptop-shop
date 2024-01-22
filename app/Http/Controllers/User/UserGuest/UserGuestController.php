@@ -180,7 +180,7 @@ class UserGuestController extends Controller
                 };
 
                 Session::flash('error', $msg);
-                return Redirect::back();
+                return Redirect::to('/');
             } else {
                 DB::beginTransaction();
 
@@ -211,10 +211,10 @@ class UserGuestController extends Controller
 
                 if (is_null($laptop)) {
                     Session::flash('error', 'Internal Server Error');
-                    return Redirect::back();
+                    return Redirect::to('/');
                 } else {
                     Session::flash('success', 'Updated Successfully');
-                    return Redirect::back();
+                    return Redirect::to('/');
                 }
             }
         }

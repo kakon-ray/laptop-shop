@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useDispatch, useSelector } from "react-redux";
 import {getCartList} from "../../redux/action/CartListAction";
 import { all } from 'axios';
+import { Link } from '@inertiajs/react'
 
 const TopNav = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ const TopNav = () => {
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem('cart'));
-    console.log(data)
     if (data) {
       dispatch(getCartList(data));
     }
@@ -31,9 +31,9 @@ const TopNav = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/add-new-laptop">Add To Product</Nav.Link>
-              <Nav.Link href="/cart">Cart {allcart.length}</Nav.Link>
+              <Link className="nav-link" href="/">Home</Link>
+              <Link className="nav-link" href="/add-new-laptop">Add To Product</Link>
+              <Link className="nav-link" href="/cart">Cart {allcart.length}</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

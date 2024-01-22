@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProduct } from "../redux/action/ProductAction";
 
 
-const UpdateLaptop = ({success, error,laptop}) => {
+const UpdateLaptop = ({laptop}) => {
     const dispatch = useDispatch();
 
 
@@ -30,34 +30,7 @@ const UpdateLaptop = ({success, error,laptop}) => {
 
     }
 
-    useEffect(() => {
-        if (success) {
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: success,
-                showConfirmButton: false,
-                timer: 1500
-            });
 
-            dispatch(updateProduct(data))
-
-            setTimeout(function() {
-                navigation.navigate('/')
-            }, 1500);
-
-        } else if (error) {
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: error,
-                showConfirmButton: false,
-                timer: 1500
-            });
-    
-        }
-      
-    }, [success, error]);
 
     return (
         <>
