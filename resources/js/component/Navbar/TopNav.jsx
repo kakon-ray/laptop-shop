@@ -32,6 +32,7 @@ const TopNav = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/add-new-laptop">Add To Product</Nav.Link>
               <Nav.Link href="/add-new-laptop">Cart {allcart.length}</Nav.Link>
             </Nav>
           </Navbar.Collapse>
