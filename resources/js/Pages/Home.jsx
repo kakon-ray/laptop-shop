@@ -57,7 +57,6 @@ const Home = ({ allLaptop }) => {
                                     <th>Name</th>
                                     <th>Image</th>
                                     <th>Price</th>
-                                    <th>Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
