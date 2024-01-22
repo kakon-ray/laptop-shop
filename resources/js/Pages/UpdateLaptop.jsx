@@ -3,8 +3,13 @@ import TopNav from '../component/Navbar/TopNav';
 import { useForm } from '@inertiajs/react'
 import Swal from 'sweetalert2';
 import { Inertia } from '@inertiajs/inertia'
+import { useDispatch, useSelector } from "react-redux";
+import { updateProduct } from "../redux/action/ProductAction";
+
 
 const UpdateLaptop = ({success, error,laptop}) => {
+    const dispatch = useDispatch();
+
 
     const { data, setData, post, progress } = useForm({
         name: null,
@@ -15,8 +20,8 @@ const UpdateLaptop = ({success, error,laptop}) => {
 
     useEffect(() => {
         setData(laptop);
-       
     }, [laptop]);
+    
 
     function submit(e) {
         e.preventDefault()
@@ -33,9 +38,11 @@ const UpdateLaptop = ({success, error,laptop}) => {
                 showConfirmButton: false,
                 timer: 1500
             });
-        
+
+            dispatch(updateProduct(data))
+
             setTimeout(function() {
-                window.history.back();
+                navigation.navigate('/')
             }, 1500);
 
         } else if (error) {
