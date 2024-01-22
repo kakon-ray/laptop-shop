@@ -7,6 +7,7 @@ use Inertia\Inertia;
 
 
 Route::get('/', [UserGuestController::class, 'home'])->name('home');
+Route::get('/cart', [UserGuestController::class, 'cart'])->name('cart');
 Route::get('/add-new-laptop', [UserGuestController::class, 'add_new_laptop'])->name('add.new.laptop');
 Route::post('/save-laptop', [UserGuestController::class, 'save_laptop']);
 Route::get('/delete-laptop/{id}', [UserGuestController::class, 'delete_laptop']);

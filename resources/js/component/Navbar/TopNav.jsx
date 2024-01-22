@@ -33,7 +33,7 @@ const TopNav = () => {
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/add-new-laptop">Add To Product</Nav.Link>
-              <Nav.Link href="/add-new-laptop">Cart {allcart.length}</Nav.Link>
+              <Nav.Link href="/cart">Cart {allcart.length}</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

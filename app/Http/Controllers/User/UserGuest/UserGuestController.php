@@ -19,6 +19,11 @@ class UserGuestController extends Controller
         $allLaptop = Laptop::get();
         return Inertia::render('Home', ['allLaptop' => $allLaptop]);
     }
+    public function cart()
+    {
+        $allLaptop = Laptop::get();
+        return Inertia::render('Cart');
+    }
     public function add_new_laptop()
     {
         return Inertia::render('AddNewLaptop', ['title' => 'Kakon Ray']);

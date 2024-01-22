@@ -1,6 +1,6 @@
 
 import Swal from "sweetalert2"
-import { GET_PRODUCT, ADD_PRODUCT,GET_CARTLIST, DELETE_PORDUCT, UPDATE_PORDUCT, ADD_CARTLIST } from "../ActionType"
+import { GET_PRODUCT, ADD_PRODUCT,GET_CARTLIST, DELETE_PORDUCT,DELETE_CARTLIST, UPDATE_PORDUCT, ADD_CARTLIST } from "../ActionType"
 
 const initialState = {
     cart: [],
@@ -78,6 +78,18 @@ const productReducer = (state = initialState, action) => {
                     cart: [...state.cart, { ...action.payload, quantity: 1 }]
                 }
             }
+
+            case DELETE_CARTLIST:
+                const newCart = state.cart.filter(
+                    (item) => item.id !== action.payload);
+             localStorage.setItem('cart', JSON.stringify(newCart));
+                return{
+                    ...state,
+                    cart:state.cart.filter(
+                        (item) => item.id !== action.payload
+                      ),
+                }
+
 
         default:
             return state
